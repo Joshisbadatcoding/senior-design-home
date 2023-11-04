@@ -172,9 +172,15 @@ void checkPress(TFT_eSPI* tft, TFT_eSPI_Button key[], char keyLabel[][6], uint16
     if (b < 3) tft->setFreeFont(LABEL1_FONT);
     else tft->setFreeFont(LABEL2_FONT);
 
-    if (key[b].justReleased()) key[b].drawButton();     // draw normal
+    if (key[b].justReleased()){
+        if(b == 0 || b == 2)
+            tft->setFreeFont(&FreeSansBoldOblique9pt7b);
+        key[b].drawButton();     // draw normal
+    } 
 
     if (key[b].justPressed()) {
+      if(b == 0 || b == 2)
+          tft->setFreeFont(&FreeSansBoldOblique9pt7b);
       key[b].drawButton(true);  // draw invert
 
       // if a numberpad button, append the relevant # to the numberBuffer
