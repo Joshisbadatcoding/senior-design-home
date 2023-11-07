@@ -42,6 +42,8 @@ TFT_eSPI_Button key[15];
 
 bool idle_state = true;
 unsigned long last_press;
+bool correct_pass = false;
+unsigned long password_timer;
 //unsigned long runtime;
 
 //------------------------------------------------------------------------------------------
@@ -91,8 +93,12 @@ void loop(void) {
     printed = false;
   }
 
-  checkPress(&tft, key, keyLabel, t_x, t_y, pressed, numberBuffer, password);
+  correct_pass = checkPress(&tft, key, keyLabel, t_x, t_y, pressed, numberBuffer, password);
   updateDisplayField(&tft, numberBuffer);
+  if(correct_pass){
+    password_timer = millis();
+    correct_pass = false;
+  }
 
   //add code here
 }

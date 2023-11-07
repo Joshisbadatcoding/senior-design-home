@@ -155,7 +155,7 @@ void status(const char *msg, TFT_eSPI* tft)
   tft->drawString(msg, STATUS_X, STATUS_Y);
 }
 
-void checkPress(TFT_eSPI* tft, TFT_eSPI_Button key[], char keyLabel[][6], uint16_t t_x, uint16_t t_y, bool pressed, char numberBuffer[], const char password[])
+bool checkPress(TFT_eSPI* tft, TFT_eSPI_Button key[], char keyLabel[][6], uint16_t t_x, uint16_t t_y, bool pressed, char numberBuffer[], const char password[])
 {
   // / Check if any key coordinate boxes contain the touch coordinates
   for (uint8_t b = 0; b < 15; b++) {
@@ -207,8 +207,19 @@ void checkPress(TFT_eSPI* tft, TFT_eSPI_Button key[], char keyLabel[][6], uint16
         Serial.println(numberBuffer);
         if(checkPass(numberBuffer, password)){
           status("Correct Password", tft);
+          tft->fillScreen(TFT_GREEN);
+          tft->setTextColor(TFT_WHITE);
+    
+          uint16_t x = tft->width() / 2;
+          uint16_t y = tft->height() / 2;
+          // Set datum to Middle Left
+          //tft.setTextDatum(MR_DATUM);
+
+          // Draw text with left datum in font 6
+          tft->drawString("PASSWORD CORRECT", x-120, y-20, 4);
           numberIndex = 0; // Reset index to 0
           numberBuffer[numberIndex] = 0; // Place null in buffer
+          return true;
         }
         else{
           status("Password Incorrect", tft);
@@ -223,6 +234,7 @@ void checkPress(TFT_eSPI* tft, TFT_eSPI_Button key[], char keyLabel[][6], uint16
       }
     }
   }
+  return false;
 }
 
 void updateDisplayField(TFT_eSPI* tft, char numberBuffer[])

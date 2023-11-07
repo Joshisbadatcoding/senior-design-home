@@ -46,5 +46,5 @@ bool print_default(TFT_eSPI* tft, char numberBuffer[]);
 void drawKeypad(TFT_eSPI* tft, TFT_eSPI_Button key[], uint16_t keyColor[], char keyLabel[][6]);
 void touch_calibrate(TFT_eSPI* tft);
 void status(const char *msg, TFT_eSPI* tft);
-void checkPress(TFT_eSPI* tft, TFT_eSPI_Button key[], char keyLabel[][6], uint16_t t_x, uint16_t t_y, bool pressed, char numberBuffer[], const char password[]);
+bool checkPress(TFT_eSPI* tft, TFT_eSPI_Button key[], char keyLabel[][6], uint16_t t_x, uint16_t t_y, bool pressed, char numberBuffer[], const char password[]);
 void updateDisplayField(TFT_eSPI* tft, char numberBuffer[]);
