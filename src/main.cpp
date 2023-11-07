@@ -42,7 +42,7 @@ TFT_eSPI_Button key[15];
 
 bool idle_state = true;
 unsigned long last_press;
-unsigned long runtime;
+//unsigned long runtime;
 
 //------------------------------------------------------------------------------------------
 
@@ -86,11 +86,13 @@ void loop(void) {
   {
     // Draw keypad
     drawKeypad(&tft, key, keyColor, keyLabel);
-    Serial.println("drew keypad");
+    //Serial.println("drew keypad");
     idle_state = false;
     printed = false;
   }
 
   checkPress(&tft, key, keyLabel, t_x, t_y, pressed, numberBuffer, password);
   updateDisplayField(&tft, numberBuffer);
+
+  //add code here
 }
