@@ -11,7 +11,7 @@ bool print_default(TFT_eSPI* tft, char numberBuffer[])
      // Clear the screen
     tft->fillScreen(TFT_BLACK);
     tft->setCursor(4, 4);
-    tft->setTextColor(TFT_WHITE, TFT_BLUE);
+    tft->setTextColor(TFT_WHITE);
     
     uint16_t x = tft->width() / 2;
     uint16_t y = tft->height() / 2;
